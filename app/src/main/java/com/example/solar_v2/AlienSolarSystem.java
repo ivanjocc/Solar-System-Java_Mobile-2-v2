@@ -148,37 +148,49 @@ public class AlienSolarSystem extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+        // Asumiendo que tienes una imagen de fondo que deseas dibujar primero
         if (imagenFondo != null) {
             canvas.drawBitmap(imagenFondo, null, new Rect(0, 0, getWidth(), getHeight()), null);
         }
 
-        Paint paint = new Paint();
+        // Preparar el rectángulo que representa la posición y tamaño de la nave
         Rect naveRect = new Rect((int)naveX, (int)naveY, (int)(naveX + naveImagen.getWidth()), (int)(naveY + naveImagen.getHeight()));
 
-        for (int i = 0; i < planetas.size(); i++) {
-            AstreCeleste planeta = planetas.get(i);
-            Bitmap imagenPlaneta = imagenesPlanetas.get(i);
+        Paint paint = new Paint();
+
+        // Iterar sobre cada planeta para dibujarlo y comprobar si hay colisión con la nave
+        for (AstreCeleste planeta : planetas) {
+            // Obteniendo el bitmap del planeta actual
+            Bitmap imagenPlaneta = imagenesPlanetas.get(planetas.indexOf(planeta));
+
+            // Calcular la posición del planeta basado en su centro
             int x = (int)planeta.getX() - (imagenPlaneta.getWidth() / 2);
             int y = (int)planeta.getY() - (imagenPlaneta.getHeight() / 2);
 
+            // Crear un rectángulo para el planeta que representa su posición y tamaño
             Rect planetaRect = new Rect(x, y, x + imagenPlaneta.getWidth(), y + imagenPlaneta.getHeight());
 
-            if (Rect.intersects(naveRect, planetaRect)) {
-                paint.setColorFilter(new LightingColorFilter(0xFF7F7F7F, 0x00000000));
+            // Comprobar si hay colisión entre la nave y el planeta
+            if (Rect.intersects(naveRect, planetaRect) && !planeta.isTocado()) {
+                // Marcar el planeta como tocado si es la primera vez que se detecta colisión
+                planeta.setTocado(true);
+            }
+
+            // Si el planeta ha sido tocado, cambiar el paint para modificar su apariencia
+            if (planeta.isTocado()) {
+                paint.setColorFilter(new LightingColorFilter(0xFFFFFFFF, 0xFFCCCCCC)); // Cambiar colores según necesites
             } else {
-                paint.setColorFilter(null);
+                paint.setColorFilter(null); // Sin filtro de color si no ha sido tocado
             }
 
-            if (imagenPlaneta != null) {
-                canvas.drawBitmap(imagenPlaneta, x, y, paint);
-            }
+            // Dibujar el planeta con el paint actual
+            canvas.drawBitmap(imagenPlaneta, x, y, paint);
         }
 
-        // Dibuja la nave
-        if (naveImagen != null) {
-            canvas.drawBitmap(naveImagen, naveX, naveY, null);
-        }
+        // Finalmente, dibujar la nave sin cambios en el paint
+        canvas.drawBitmap(naveImagen, naveX, naveY, null);
     }
+
 
     public void setNaveX(float x) {
         float limiteIzquierdo = 0;
