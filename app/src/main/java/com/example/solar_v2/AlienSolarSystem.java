@@ -126,7 +126,7 @@ public class AlienSolarSystem extends View {
         planetas.add(new AstreCeleste(4, "Marte", 50, "#ff5733", 1, "marte", 400, 400));
         planetas.add(new AstreCeleste(5, "Júpiter", 140, "#c79b63", 1, "jupiter", 500, 500));
         planetas.add(new AstreCeleste(6, "Saturno", 120, "#ead9a4", 1, "saturno", 600, 600));
-        planetas.add(new AstreCeleste(7, "Urano", 100, "#a4e4eb", 0, "urano", 700, 700));
+        planetas.add(new AstreCeleste(7, "Urano", 100, "#a4e4eb", 1, "urano", 700, 700));
         planetas.add(new AstreCeleste(8, "Neptuno", 100, "#4973a6", 0, "neptuno", 800, 800));
         planetas.add(new AstreCeleste(9, "Plutón", 30, "#d3c1d0", 0, "pluton", 900, 900));
 
