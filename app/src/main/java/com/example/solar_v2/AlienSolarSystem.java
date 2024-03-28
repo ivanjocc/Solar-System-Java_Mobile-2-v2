@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.LightingColorFilter;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -145,19 +146,23 @@ public class AlienSolarSystem extends View {
         }
 
         Rect naveRect = new Rect((int)naveX, (int)naveY, (int)(naveX + naveImagen.getWidth()), (int)(naveY + naveImagen.getHeight()));
-
         Paint paint = new Paint();
+        Paint paintTexto = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paintTexto.setColor(Color.WHITE);
+        paintTexto.setTextSize(40);
+        paintTexto.setTextAlign(Paint.Align.CENTER);
+
+        String nombrePlanetaTocado = null;
 
         for (AstreCeleste planeta : planetas) {
             Bitmap imagenPlaneta = imagenesPlanetas.get(planetas.indexOf(planeta));
-
             int x = (int)planeta.getX() - (imagenPlaneta.getWidth() / 2);
             int y = (int)planeta.getY() - (imagenPlaneta.getHeight() / 2);
-
             Rect planetaRect = new Rect(x, y, x + imagenPlaneta.getWidth(), y + imagenPlaneta.getHeight());
 
-            if (Rect.intersects(naveRect, planetaRect) && !planeta.isTocado()) {
+            if (Rect.intersects(naveRect, planetaRect)) {
                 planeta.setTocado(true);
+                nombrePlanetaTocado = planeta.getName();
             }
 
             if (planeta.isTocado()) {
@@ -169,8 +174,13 @@ public class AlienSolarSystem extends View {
             canvas.drawBitmap(imagenPlaneta, x, y, paint);
         }
 
+        if (nombrePlanetaTocado != null) {
+            canvas.drawText(nombrePlanetaTocado, getWidth() / 2, 60, paintTexto);
+        }
+
         canvas.drawBitmap(naveImagen, naveX, naveY, null);
     }
+
 
 
     public void setNaveX(float x) {
