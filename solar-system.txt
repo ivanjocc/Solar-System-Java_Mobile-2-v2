@@ -1,0 +1,41 @@
+startscreen
+game on
+main
+obstacle
+table
+
+accelerometer
+change color
+
+
+NomAstre(String)
+TailleAstre(int en px)
+CouleurAstre(4 possible)
+StatusAstre(bool)
+NomImageAstre(String)
+
+
+    Estructura de la Base de Datos: SolarSystemC.java -> SolarSystemDBHelper.java
+    Acceso a Datos: PlanetaDao.java
+    Modelo de Datos: AstreCeleste.java
+    Interfaz de Usuario y Flujo del Juego: StartScreen.java -> GameActivity.java -> AlienSolarSystem.java
+
+
+    SolarSystemC.java (o SolarSystemContract.java): Comenzar con la definición de las constantes utilizadas para la estructura de la base de datos.
+
+    SolarSystemDBHelper.java: Continuar con la clase que ayuda a crear y administrar la base de datos SQLite.
+
+    PlanetaDao.java (si lo tienes): Si has creado un DAO para interactuar con la base de datos, compartir este archivo podría ser útil en este punto.
+
+    AstreCeleste.java: Mostrar la clase que representa los objetos del sistema solar, como planetas.
+
+    MainActivity.java: Compartir el código del punto de entrada de tu aplicación, donde inicializas la base de datos si es necesario y gestionas la navegación a otras actividades.
+
+    GameActivity.java: Si tienes una actividad para el juego, puedes compartir el código de esta clase a continuación.
+
+    AlienSolarSystem.java: En caso de que tengas una vista personalizada para representar el sistema solar alienígena, compartir su código sería relevante en este punto.
+
+    activity_main.xml: Si tienes un layout XML para la actividad principal, puedes compartirlo aquí.
+
+    activity_game.xml (si tienes): Si también tienes un layout XML para la actividad del juego, puedes compartirlo después del activity_main.xml.
+
